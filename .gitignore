@@ -85,3 +85,6 @@ nb-configuration.xml
 
 # dat files
 *.dat
+
+# Makefile
+Makefile
