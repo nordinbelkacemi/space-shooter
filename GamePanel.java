@@ -1,18 +1,19 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
 
 public class GamePanel extends JPanel {
-    public static int WIDTH = 600;
-    public static int HEIGHT = 600;
-    public static int MARGIN = 10;
-    public static int HEALTHBARWIDTH = 100;
+    private int WIDTH = Constants.PANELWIDTH;
+    private int HEIGHT = Constants.PANELHEIGHT;
+    private int MARGIN = Constants.PANELMARGIN;
+    private int HEALTHBARWIDTH = Constants.HEALTHBARWIDTH;
     
     private Game game;
     private SpaceShip spaceShip;
 
     private Timer timer;
-    private int updatePeriod = 33;
+    private static int timerPeriod = Constants.timerPeriod;
 
     public GamePanel() {
         init();
@@ -20,50 +21,66 @@ public class GamePanel extends JPanel {
     }
 
     private void init() {
+        initGameData();
+        setUpPanel();
+    }
+
+    private void initGameData() {
         game = new Game();
         spaceShip = game.getSpaceShip();
-        
-        setPreferredSize(new Dimension(WIDTH, HEIGHT));
+    }
+
+    private void setUpPanel() {
+        setPreferredSize(new Dimension(Constants.PANELWIDTH, Constants.PANELHEIGHT));
         setBackground(Color.BLACK);
         addKeyListener(new KeyListener(this));
         setFocusable(true);
     }
 
     private void startTimer() {
-        timer = new Timer(updatePeriod, new TimerListener(this));
+        timer = new Timer(timerPeriod, new TimerListener(this));
         timer.start();
     }
-
+    
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         drawHealthBar(g);
-        g.drawImage(spaceShip.getImage(), spaceShip.getX(), spaceShip.getY(), null);
+        drawSprites(g);
     }
-
+    
     private void drawHealthBar(Graphics g) {
         int health = spaceShip.getHealth();
+        
         g.setColor(Color.WHITE);
         g.drawRect(WIDTH - MARGIN - HEALTHBARWIDTH - 20, MARGIN + 20, HEALTHBARWIDTH, 10);
+        
         if (health > 40)
-            g.setColor(Color.GREEN);
+        g.setColor(Color.GREEN);
         if (health == 40)
-            g.setColor(Color.GREEN);
+        g.setColor(Color.ORANGE);
         if (health == 20)
-            g.setColor(Color.RED);
+        g.setColor(Color.RED);
         g.fillRect(WIDTH - MARGIN - HEALTHBARWIDTH - 20, MARGIN + 20, health, 10);
     }
-
-    public void update() {
-        Sprite sprite = game.getSpaceShip();
-        sprite.move();
-        repaint();
+    
+    private void drawSprites(Graphics g) {
+        ArrayList<Sprite> sprites = game.getAllSprites();
+        for (int i = 0; i < sprites.size(); i++) {
+            Sprite sprite = sprites.get(i);
+            g.drawImage(sprite.getImage(), sprite.getX(), sprite.getY(), null);
+        } 
     }
-
+    
     public void keyPressed(KeyEvent e) {
         game.keyPressed(e);
     }
-
+    
     public void keyReleased(KeyEvent e) {
         game.keyReleased(e);
+    }
+
+    public void update() {
+        game.update();
+        repaint();
     }
 }

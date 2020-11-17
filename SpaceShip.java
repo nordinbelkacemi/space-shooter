@@ -1,18 +1,18 @@
 import javax.swing.*;
 import java.awt.event.*;
+import java.util.ArrayList;
 
 public class SpaceShip extends Sprite {
     private int health;
-    private int spriteWidth = 37;
-    private int spriteHeight = 35;
-    private int dx, dy;
+    private int xSpeed, ySpeed;
 
     public SpaceShip() {
+        setImage("spaceship.png", Constants.spaceShipIconWidth, Constants.spaceShipIconHeight);
+
         health = 100;
         setPos(300 - spriteWidth / 2, 500);
-        dx = 0;
-        dy = 0;
-        setImage("spaceship.png");
+        xSpeed = 0;
+        ySpeed = 0;
     }
 
     public int getHealth() {
@@ -23,67 +23,58 @@ public class SpaceShip extends Sprite {
         health -= 20;
     }
 
-    public int getSpriteWidth() {
-        return spriteWidth;
-    }
-
-    public int getSpriteHeight() {
-        return spriteHeight;
-    }
-
     public void setMoveDirection(int key) {
         if (key == KeyEvent.VK_W)
-            dy = -2;
+            ySpeed = -Constants.playerSpeed;
         
         if (key == KeyEvent.VK_A)
-            dx = -2;
+            xSpeed = -Constants.playerSpeed;
 
         if (key == KeyEvent.VK_S)
-            dy = 2;
+            ySpeed = Constants.playerSpeed;
         
         if (key == KeyEvent.VK_D)
-            dx = 2;
+            xSpeed = Constants.playerSpeed;
 
     }
 
     public void stopMoveDirection(int key) {
-        if (key == KeyEvent.VK_W && dy < 0)
-            dy = 0;
+        if (key == KeyEvent.VK_W && ySpeed < 0)
+            ySpeed = 0;
         
-        if (key == KeyEvent.VK_S && dy > 0)
-            dy = 0;
+        if (key == KeyEvent.VK_S && ySpeed > 0)
+            ySpeed = 0;
 
-        if (key == KeyEvent.VK_A && dx < 0)
-            dx = 0;
+        if (key == KeyEvent.VK_A && xSpeed < 0)
+            xSpeed = 0;
 
-        if (key == KeyEvent.VK_D && dx > 0)
-            dx = 0;
+        if (key == KeyEvent.VK_D && xSpeed > 0)
+            xSpeed = 0;
     }
 
     public void move() {
-        int h = GamePanel.HEIGHT;
-        int w = GamePanel.WIDTH;
-        int margin = GamePanel.MARGIN;
+        int h = Constants.PANELHEIGHT;
+        int w = Constants.PANELWIDTH;
+        int margin = Constants.PANELMARGIN;
 
         if (x - margin > 0)
-            x += dx;
+            x += xSpeed;
         else
             x = margin + 1;
 
         if (x + spriteWidth + margin < w)
-            x += dx;
+            x += xSpeed;
         else
             x = w - (spriteWidth + margin);
 
         if (y - margin > 0)
-            y += dy;
+            y += ySpeed;
         else
             y = margin + 1;
 
         if (y + spriteHeight + margin < h)
-            y += dy;
+            y += ySpeed;
         else
             y = h - (spriteWidth + margin);
     }
-
 }
