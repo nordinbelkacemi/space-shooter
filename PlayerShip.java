@@ -1,9 +1,8 @@
 import java.awt.event.*;
+import java.util.ArrayList;
 
 public class PlayerShip extends SpaceShip{
     private boolean dead;
-    private boolean justTookDamage;
-    protected int timeTurnedRed;
     private String redImagePath;
 
     public PlayerShip() {
@@ -15,6 +14,7 @@ public class PlayerShip extends SpaceShip{
         setPos(Constants.PANELWIDTH / 2 - spriteWidth / 2, Constants.PANELHEIGHT - 100);
         xSpeed = 0;
         ySpeed = 0;
+        timeUntilNextDamage = 0;
     }
 
     public void setMoveDirection(int key) {
@@ -84,21 +84,19 @@ public class PlayerShip extends SpaceShip{
         return dead;
     }
 
-    public void changeImageAtDamage() {
-        justTookDamage = true;
-        setImage(redImagePath, spriteWidth, spriteHeight);
-        timeTurnedRed = Constants.damageEffectTime / Constants.timerPeriod;
-    }
-
-    public boolean justTookDamage() {
-        return justTookDamage;
-    }
-
-    public void stepTimeTurnedRed() {
-        timeTurnedRed -= 1;
-        if (timeTurnedRed == 0) {
+    protected void changeImageAtDamage() {
+        if (timeUntilNextDamage == 0) {
             setImage(imagePath, spriteWidth, spriteHeight);
-            justTookDamage = false;
+        } else {
+            setImage(redImagePath, spriteWidth, spriteHeight);
+        }
+    }
+
+    public void handleCollisionWith(ArrayList<EnemyShip> enemyShips) {
+        for (int i = 0; i < enemyShips.size(); i++) {
+            EnemyShip enemyShip = enemyShips.get(i);
+            if (this.overlapsWith(enemyShip))
+                takeDamage(Constants.shipDamageTimeout);
         }
     }
 }

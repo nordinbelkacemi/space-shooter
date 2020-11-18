@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class Laser extends Sprite {
+public abstract class Laser extends Sprite {
     protected int speed;
 
     public Laser(int x, int y) {
@@ -9,7 +9,7 @@ public class Laser extends Sprite {
 
     public void handleCollisionWith(SpaceShip spaceShip) {
         if (this.overlapsWith(spaceShip)) {
-            spaceShip.takeDamage();
+            giveDamage(spaceShip);
             inactive = true;
         }
     }
@@ -19,4 +19,6 @@ public class Laser extends Sprite {
         if (y < 0 - spriteHeight)
             outOfRange = true;
     }
+
+    protected abstract void giveDamage(SpaceShip spaceShip);
 }

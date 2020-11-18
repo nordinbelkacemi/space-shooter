@@ -46,14 +46,16 @@ public class Constants {
 
 
     /* game constants */
-    public static int timerPeriod = 17;             // ~60fps
+    public static int timerPeriod = 17;                     // ~60fps
     public static int enemySpeed = 1;
     public static int playerSpeed = 2;
     public static int playerLaserSpeed = -20;
     public static int enemyLaserSpeed = 10;
     public static int firstEnemySpawnTime = 4000;
-    public static int enemySpawnPeriod = 2000;      // level dependent
-    public static int minEnemyShootPeriod = 100;    // level dependent
+    public static int enemySpawnPeriod = 2000;              // level dependent
+    public static int minEnemyShootPeriod = 100;            // level dependent
+    public static int shipDamageTimeout = 600;
+    public static int laserDamageTimeout = 200;
     
-    public static int damageEffectTime = 500;       // ~ms at 60fps
+    public static int damageEffectTime = 500;               // ~ms at 60fps
 }

@@ -20,6 +20,7 @@ public class EnemyShip extends SpaceShip {
         this.health = health;
         waiting = true;
         waitTime = Math.abs(random.nextInt() % Constants.minEnemyShootPeriod);
+        timeUntilNextDamage = 0;
     }
     
     public void move() {
@@ -69,7 +70,7 @@ public class EnemyShip extends SpaceShip {
         return laser;
     }
 
-    public void changeImageAtDamage() {
+    protected void changeImageAtDamage() {
         int width = Constants.enemyShipIconWidth;
         int height = Constants.enemyShipIconHeight;
         String[] images = Constants.redEnemyShipIcons;

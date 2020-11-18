@@ -135,9 +135,14 @@ public class Game {
         }
     }
 
+    private void handleSpaceShipCollisions() {
+        playerShip.handleCollisionWith(enemyShips);
+    }
+
     private void handleCollisions() {
         handlePlayerLaserCollisions();
         handleEnemyLaserCollisions();
+        handleSpaceShipCollisions();
     }
 
     private void handleExplosions() {
@@ -148,9 +153,8 @@ public class Game {
         }
     }
 
-    private void handlePlayerDamage() {
-        if (playerShip.justTookDamage())
-            playerShip.stepTimeTurnedRed();
+    private void handleDamageTimeout() {
+        playerShip.stepDamageTimeout();
     }
 
     private void makeEnemyShipsShoot() {
@@ -170,7 +174,7 @@ public class Game {
         makeEnemyShipsShoot();
         handleCollisions();
         handleExplosions();
-        handlePlayerDamage();
+        handleDamageTimeout();
         removeInactiveSprites();
         removeOutOfRangeSprites();
     }

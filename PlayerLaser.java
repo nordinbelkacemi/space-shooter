@@ -13,4 +13,8 @@ public class PlayerLaser extends Laser {
             handleCollisionWith(enemyShip);
         }
     }
+
+    protected void giveDamage(SpaceShip spaceShip) {
+        spaceShip.takeDamage(0);
+    }
 }
