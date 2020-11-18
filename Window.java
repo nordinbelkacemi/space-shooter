@@ -5,7 +5,9 @@ public class Window extends JFrame {
     public Window() {
         setTitle("SpaceShooter");
         
-        GamePanel gamePanel = new GamePanel();
+        Game game = new Game();
+
+        GamePanel gamePanel = new GamePanel(game);
         add(gamePanel);
         pack();
         setResizable(false);

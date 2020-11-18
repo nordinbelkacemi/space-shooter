@@ -5,17 +5,18 @@ import java.util.ArrayList;
 
 public class GamePanel extends JPanel {
     private int WIDTH = Constants.PANELWIDTH;
-    private int HEIGHT = Constants.PANELHEIGHT;
+    // private int HEIGHT = Constants.PANELHEIGHT;
     private int MARGIN = Constants.PANELMARGIN;
     private int HEALTHBARWIDTH = Constants.HEALTHBARWIDTH;
     
     private Game game;
-    private SpaceShip spaceShip;
+    private PlayerShip playerShip;
 
     private Timer timer;
     private static int timerPeriod = Constants.timerPeriod;
 
-    public GamePanel() {
+    public GamePanel(Game game) {
+        this.game = game;
         init();
         startTimer();
     }
@@ -27,7 +28,7 @@ public class GamePanel extends JPanel {
 
     private void initGameData() {
         game = new Game();
-        spaceShip = game.getSpaceShip();
+        playerShip = game.getPlayerShip();
     }
 
     private void setUpPanel() {
@@ -49,7 +50,7 @@ public class GamePanel extends JPanel {
     }
     
     private void drawHealthBar(Graphics g) {
-        int health = spaceShip.getHealth();
+        int health = playerShip.getHealth();
         
         g.setColor(Color.WHITE);
         g.drawRect(WIDTH - MARGIN - HEALTHBARWIDTH - 20, MARGIN + 20, HEALTHBARWIDTH, 10);

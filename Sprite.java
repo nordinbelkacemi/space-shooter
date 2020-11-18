@@ -3,8 +3,10 @@ import java.awt.Image;
 
 public abstract class Sprite {
     protected ImageIcon img;
+    protected String imagePath;
     protected int spriteWidth;
     protected int spriteHeight;
+
     protected int x;
     protected int y;
 
