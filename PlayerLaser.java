@@ -1,8 +1,8 @@
 import java.util.ArrayList;
 
 public class PlayerLaser extends Laser {
-    public PlayerLaser(int x, int y) {
-        super(x, y);
+    public PlayerLaser(int x, int y, SpaceShip spaceShip) {
+        super(x, y, spaceShip);
         setImage(Constants.playerLaserIcon, Constants.laserIconWidth, Constants.laserIconHeight);
         this.speed = Constants.playerLaserSpeed;
     }
@@ -15,6 +15,11 @@ public class PlayerLaser extends Laser {
     }
 
     protected void giveDamage(SpaceShip spaceShip) {
-        spaceShip.takeDamage(0);
+        int points = this.spaceShip.getPoints();
+        if (inactive == false && !spaceShip.isExploding()) {
+            this.spaceShip.setPoints(points + Constants.pointsPerDamage);
+        }
+        int damageTimeout = 0;
+        spaceShip.takeDamage(spaceShip.getDamage(), damageTimeout);
     }
 }

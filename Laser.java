@@ -2,9 +2,11 @@ import java.util.ArrayList;
 
 public abstract class Laser extends Sprite {
     protected int speed;
+    protected SpaceShip spaceShip;
 
-    public Laser(int x, int y) {
+    public Laser(int x, int y, SpaceShip spaceShip) {
         setPos(x + Constants.spaceShipIconWidth / 2, y - spriteHeight);
+        this.spaceShip = spaceShip;
     }
 
     public void handleCollisionWith(SpaceShip spaceShip) {

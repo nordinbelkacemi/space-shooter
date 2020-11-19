@@ -2,7 +2,6 @@ import java.awt.event.*;
 import java.util.ArrayList;
 
 public class PlayerShip extends SpaceShip{
-    private boolean dead;
     private String redImagePath;
 
     public PlayerShip() {
@@ -15,6 +14,7 @@ public class PlayerShip extends SpaceShip{
         xSpeed = 0;
         ySpeed = 0;
         timeUntilNextDamage = 0;
+        damage = Constants.playerDamage;
     }
 
     public void setMoveDirection(int key) {
@@ -72,31 +72,26 @@ public class PlayerShip extends SpaceShip{
     }
 
     public PlayerLaser shootLaser() {
-        PlayerLaser laser = new PlayerLaser(x, y);
+        PlayerLaser laser = new PlayerLaser(x, y, this);
         return laser;
     }
 
-    public void die() {
-        dead = true;
-    };
-
-    public boolean isDead() {
-        return dead;
-    }
-
-    protected void changeImageAtDamage() {
-        if (timeUntilNextDamage == 0) {
-            setImage(imagePath, spriteWidth, spriteHeight);
-        } else {
-            setImage(redImagePath, spriteWidth, spriteHeight);
+    protected void reactToDamage() {
+        if (health != 0) {
+            if (timeUntilNextDamage == 0) {
+                setImage(imagePath, spriteWidth, spriteHeight);
+            } else {
+                setImage(redImagePath, spriteWidth, spriteHeight);
+            }
         }
     }
 
     public void handleCollisionWith(ArrayList<EnemyShip> enemyShips) {
         for (int i = 0; i < enemyShips.size(); i++) {
             EnemyShip enemyShip = enemyShips.get(i);
-            if (this.overlapsWith(enemyShip))
-                takeDamage(Constants.shipDamageTimeout);
+            if (this.overlapsWith(enemyShip)) {
+                takeDamage(damage, Constants.shipDamageTimeout);
+            }
         }
     }
 }

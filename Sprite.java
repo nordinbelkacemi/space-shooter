@@ -14,8 +14,7 @@ public abstract class Sprite {
     protected boolean inactive = false;
 
     public void setImage(String imagePath, int width, int height) {
-        ImageIcon img = new ImageIcon(imagePath);
-        this.img = img;
+        this.img = new ImageIcon(getClass().getResource(imagePath));
         spriteWidth = width;
         spriteHeight = height;
     }

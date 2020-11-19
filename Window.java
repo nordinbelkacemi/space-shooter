@@ -5,7 +5,9 @@ public class Window extends JFrame {
     public Window() {
         setTitle("SpaceShooter");
         
-        Game game = new Game();
+        int level = 1;
+        int points = 0;
+        Game game = new Game(level, points);
 
         GamePanel gamePanel = new GamePanel(game);
         add(gamePanel);

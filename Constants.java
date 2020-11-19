@@ -8,18 +8,18 @@ public class Constants {
     public static int HEALTHBARWIDTH = 100;
 
 
-    /* game icons */
+    /* images */
     public static String[] explosionIcons = {
-        "images/explosions/explosion-1.png",
-        "images/explosions/explosion-2.png",
-        "images/explosions/explosion-3.png",
-        "images/explosions/explosion-4.png",
-        "images/explosions/explosion-5.png",
-        "images/explosions/explosion-6.png",
-        "images/explosions/explosion-7.png",
-        "images/explosions/explosion-8.png",
-        "images/explosions/explosion-9.png",
-        "images/explosions/explosion-10.png",
+        "images/explosion-1.png",
+        "images/explosion-2.png",
+        "images/explosion-3.png",
+        "images/explosion-4.png",
+        "images/explosion-5.png",
+        "images/explosion-6.png",
+        "images/explosion-7.png",
+        "images/explosion-8.png",
+        "images/explosion-9.png",
+        "images/explosion-10.png",
     };
     public static int explosionIconWidth = 40;
     public static int explosionIconHeight = 40;
@@ -38,11 +38,38 @@ public class Constants {
     };
     public static int enemyShipIconWidth = 35;
     public static int enemyShipIconHeight = 38;
+    // public static String enemyShipIcon = "images/gajdos.jpeg";
+    // public static String[] redEnemyShipIcons = {
+    //     "images/gajdos.jpeg",
+    //     "images/gajdos.jpeg",
+    //     "images/gajdos.jpeg",
+    //     "images/gajdos.jpeg",
+    // };
+    // public static int enemyShipIconWidth = 35;
+    // public static int enemyShipIconHeight = 35;
 
     public static String playerLaserIcon = "images/blue-laser.png";
     public static String enemyLaserIcon = "images/orange-laser.png";
     public static int laserIconWidth = 5;
     public static int laserIconHeight = 15;
+
+    public static String pauseScreen = "images/pause-screen.png";
+    public static String gameOverScreen = "images/game-over-screen.png";
+    public static String[] levels = {
+        "images/level-1.png",
+        "images/level-2.png",
+        "images/level-3.png",
+        "images/level-4.png",
+        "images/level-5.png",
+        "images/level-6.png",
+        "images/level-7.png",
+        "images/level-8.png",
+        "images/level-9.png",
+        "images/level-10.png"
+    };
+    public static int levelLabelWidth = 225;
+    public static int levelLabelHeight = 50;
+    public static String pointsFont = "fonts/00TT.TTF";
 
 
     /* game constants */
@@ -51,11 +78,20 @@ public class Constants {
     public static int playerSpeed = 2;
     public static int playerLaserSpeed = -20;
     public static int enemyLaserSpeed = 10;
-    public static int firstEnemySpawnTime = 4000;
-    public static int enemySpawnPeriod = 2000;              // level dependent
-    public static int minEnemyShootPeriod = 100;            // level dependent
+    public static int firstEnemySpawnTime = 5000;
+    public static int enemySpawnPeriod = 2000;
+    public static int[] minEnemyShootPeriod = {150, 125, 100, 150, 125, 100, 150, 125, 100, 150};
+    public static int[] enemiesPerSpawn = {1, 1, 1, 2, 2, 2, 3, 3, 3, 4};
     public static int shipDamageTimeout = 600;
     public static int laserDamageTimeout = 200;
+    public static int spawnsPerLevel = 5;
+    public static int pointsPerKill = 20;
+    public static int pointsPerDamage = 5;
+    public static int enemyPassPenalty = 19;
+    public static int hitPenalty = 3;
+    public static int playerDamage = 20;
+    public static int enemyDamage = 20;
     
     public static int damageEffectTime = 500;               // ~ms at 60fps
+
 }

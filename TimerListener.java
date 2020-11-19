@@ -3,12 +3,16 @@ import java.awt.event.ActionListener;
 
 public class TimerListener implements ActionListener {
     private GamePanel gamePanel;
+    private Game game;
 
-    public TimerListener(GamePanel gamePanel) {
+    public TimerListener(GamePanel gamePanel, Game game) {
         this.gamePanel = gamePanel;
+        this.game = game;
     }
 
     public void actionPerformed(ActionEvent e) {
-        this.gamePanel.update();
+        if (!game.isOver()) {
+            gamePanel.update();
+        }
     }
 }

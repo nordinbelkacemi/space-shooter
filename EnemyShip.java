@@ -2,14 +2,13 @@ import java.util.Random;
 import java.lang.Math;
 
 public class EnemyShip extends SpaceShip {
-    private int explodeCounter;
-    private boolean exploding;
     private int waitTime;
     private boolean waiting;
+    private int minShootPeriod;
 
     Random random = new Random();
 
-    public EnemyShip(int health) {
+    public EnemyShip(int health, int minShootPeriod) {
         setImage(Constants.enemyShipIcon, Constants.enemyShipIconWidth, Constants.enemyShipIconHeight);
         imagePath = Constants.enemyShipIcon;
         
@@ -19,8 +18,10 @@ public class EnemyShip extends SpaceShip {
         inactive = false;
         this.health = health;
         waiting = true;
-        waitTime = Math.abs(random.nextInt() % Constants.minEnemyShootPeriod);
+        this.minShootPeriod = minShootPeriod;
+        waitTime = Math.abs(random.nextInt() % minShootPeriod);
         timeUntilNextDamage = 0;
+        damage = Constants.enemyDamage;
     }
     
     public void move() {
@@ -29,27 +30,9 @@ public class EnemyShip extends SpaceShip {
             outOfRange = true;
     }
     
-    public boolean isExploding() {
-        return exploding;
-    }
-    
-    public void stepExplosionState() {
-        setImage(Constants.explosionIcons[10 - explodeCounter], Constants.explosionIconWidth, Constants.explosionIconHeight);
-        explodeCounter -= 1;
-        if (explodeCounter == 0) {
-            exploding = false;
-            inactive = true;
-        }
-    }
-    
-    public void die() {
-        exploding = true;
-        explodeCounter = 10;
-    }
-    
     private void setRandomWaitTime() {
-        waitTime = Constants.minEnemyShootPeriod;
-        waitTime += Math.abs(random.nextInt() % (Constants.minEnemyShootPeriod / 5));
+        waitTime = minShootPeriod;
+        waitTime += Math.abs(random.nextInt() % (minShootPeriod / 5));
     }
 
     public void stepWaitTime() {
@@ -65,12 +48,12 @@ public class EnemyShip extends SpaceShip {
     }
 
     public EnemyLaser shootLaser() {
-        EnemyLaser laser = new EnemyLaser(x, y);
+        EnemyLaser laser = new EnemyLaser(x, y, this);
         waiting = true;
         return laser;
     }
 
-    protected void changeImageAtDamage() {
+    protected void reactToDamage() {
         int width = Constants.enemyShipIconWidth;
         int height = Constants.enemyShipIconHeight;
         String[] images = Constants.redEnemyShipIcons;

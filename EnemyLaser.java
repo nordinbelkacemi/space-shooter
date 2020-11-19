@@ -1,11 +1,11 @@
 public class EnemyLaser extends Laser {
-    public EnemyLaser(int x, int y) {
-        super(x, y);
+    public EnemyLaser(int x, int y, SpaceShip spaceShip) {
+        super(x, y, spaceShip);
         setImage(Constants.enemyLaserIcon, Constants.laserIconWidth, Constants.laserIconHeight);
         this.speed = Constants.enemyLaserSpeed;
     }
 
     protected void giveDamage(SpaceShip spaceShip) {
-        spaceShip.takeDamage(Constants.laserDamageTimeout);
+        spaceShip.takeDamage(spaceShip.getDamage(), Constants.laserDamageTimeout);
     }
 }
