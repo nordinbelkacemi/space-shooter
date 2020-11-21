@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.IOException;
 
 public class GamePanel extends JPanel {
+    private Window window;
     private int WIDTH = Constants.PANELWIDTH;
     private int HEIGHT = Constants.PANELHEIGHT;
     private int MARGIN = Constants.PANELMARGIN;
@@ -22,8 +23,9 @@ public class GamePanel extends JPanel {
     private ImageIcon levels[];
     private Font textFont;
 
-    public GamePanel(Game game) {
+    public GamePanel(Game game, Window window) {
         this.game = game;
+        this.window = window;
         init();
         startTimer();
     }
@@ -44,6 +46,40 @@ public class GamePanel extends JPanel {
         playerShip = game.getPlayerShip();
     }
 
+    private void setUpPanel() {
+        setPreferredSize(new Dimension(Constants.PANELWIDTH, Constants.PANELHEIGHT));
+        setBackground(Color.BLACK);
+        // addKeyListener(new KeyListener(this));
+        setFocusable(true);
+        setKeyBindings();
+    }
+
+    private void setKeyBindings() {
+        for (int i = 0; i < Constants.controlKeys.length; i++) {
+            int key = Constants.controlKeys[i];
+            addPressKeyBind(KeyStroke.getKeyStroke(key, 0), key);
+            addReleaseKeyBind(KeyStroke.getKeyStroke(key, 0, true), key);
+        }
+    }
+
+    private void addPressKeyBind(KeyStroke keyStroke, int key) {
+        getInputMap(2).put(keyStroke, "pressed" + key);      
+        getActionMap().put("pressed" + key, new AbstractAction(){         
+            public void actionPerformed(ActionEvent a) {
+                game.keyPressed(key);
+            }
+        });
+    }
+
+    private void addReleaseKeyBind(KeyStroke keyStroke, int key) {
+        getInputMap(2).put(keyStroke, "released" + key);      
+        getActionMap().put("released" + key, new AbstractAction(){         
+            public void actionPerformed(ActionEvent a) {
+                game.keyReleased(key);
+            }
+        });
+    }
+
     private void setTextFont() {
         try {
             textFont = Font.createFont(Font.TRUETYPE_FONT, new File(Constants.pointsFont)).deriveFont(20f);
@@ -52,13 +88,6 @@ public class GamePanel extends JPanel {
         } catch (IOException | FontFormatException e) {
             e.printStackTrace();
         }
-    }
-
-    private void setUpPanel() {
-        setPreferredSize(new Dimension(Constants.PANELWIDTH, Constants.PANELHEIGHT));
-        setBackground(Color.BLACK);
-        addKeyListener(new KeyListener(this));
-        setFocusable(true);
     }
 
     private void startTimer() {
@@ -83,7 +112,7 @@ public class GamePanel extends JPanel {
         }
 
         if (game.isOver()) {
-            g.drawImage(gameOverScreen.getImage(), 0, 0, null);
+            window.showSaveGameForm(new GameData(game));
         }
     }
 
@@ -118,13 +147,13 @@ public class GamePanel extends JPanel {
         } 
     }
     
-    public void keyPressed(KeyEvent e) {
-        game.keyPressed(e);
-    }
+    // public void keyPressed(KeyEvent e) {
+    //     game.keyPressed(e);
+    // }
     
-    public void keyReleased(KeyEvent e) {
-        game.keyReleased(e);
-    }
+    // public void keyReleased(KeyEvent e) {
+    //     game.keyReleased(e);
+    // }
 
     public void update() {
         if (game.isNotPaused()) {
@@ -132,4 +161,37 @@ public class GamePanel extends JPanel {
         }
         repaint();
     }
+
+    // private void showSaveGameForm() {
+    //     JPanel form = new JPanel();
+    //     form.setLayout(new BoxLayout(form, BoxLayout.PAGE_AXIS));
+    //     form.setBackground(Color.WHITE);
+    //     form.setSize(400, 200);
+    //     form.setLocation(WIDTH / 2 - 400 / 2, 3 * HEIGHT / 5 - 200 / 2);
+
+    //     JPanel namePanel = new JPanel();
+    //     JLabel nameLabel = new JLabel("Name:");
+    //     JTextField nameField = new JTextField(20);
+    //     namePanel.add(nameLabel);
+    //     namePanel.add(nameField);
+
+    //     JPanel passwordPanel = new JPanel();
+    //     JLabel passwordLabel = new JLabel("Password:");
+    //     JTextField passwordField = new JTextField(20);
+    //     passwordPanel.add(passwordLabel);
+    //     passwordPanel.add(passwordField);
+
+    //     JPanel buttonsPanel = new JPanel();
+    //     JButton saveButton = new JButton("Save");
+    //     JButton cancelButton = new JButton("Back to Menu");
+    //     buttonsPanel.add(saveButton);
+    //     buttonsPanel.add(cancelButton);
+
+    //     form.add(namePanel);
+    //     form.add(passwordPanel);
+    //     form.add(buttonsPanel);
+        
+    //     form.setVisible(true);
+    //     add(form, BorderLayout.CENTER);
+    // }
 }

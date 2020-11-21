@@ -9,9 +9,7 @@ public class Game {
 
     private int enemySpawnPeriod = Constants.enemySpawnPeriod / Constants.timerPeriod;
     private int timeUntilNextEnemy;
-
     private boolean paused;
-
     private int currentLevel;
     private int spawns;
     private int enemiesPerSpawn;
@@ -19,32 +17,52 @@ public class Game {
     private boolean gameOver;
     private boolean startingNewLevel;
     private boolean playerWon;
+    private int pointsAtLevelStart;
+
+    public Game() {
+        currentLevel = 1;
+        init();
+        playerShip.setPoints(0);
+        startLevel(1);
+    }
 
     public Game(int level, int points) {
+        init();
+        currentLevel = level;
+        playerShip.setPoints(points);
+        startLevel(level);
+    }
+
+    private void init() {
         playerShip = new PlayerShip();
         enemyShips = new ArrayList<EnemyShip>();
         playerLasers = new ArrayList<PlayerLaser>();
         enemyLasers = new ArrayList<EnemyLaser>();
 
-        currentLevel = level;
         spawns = 0;
         enemiesGone = 0;
         enemiesPerSpawn = Constants.enemiesPerSpawn[currentLevel - 1];
         gameOver = false;
-        playerShip.setPoints(points);
-
-        startLevel(level);
     }
 
     private void startLevel(int level) {
         startingNewLevel = true;
-        currentLevel = level;
+        currentLevel = level;    
+        pointsAtLevelStart = playerShip.getPoints();
         spawns = 0;
         enemiesGone = 0;
         enemiesPerSpawn = Constants.enemiesPerSpawn[level - 1];
         playerShip.setHealth(100);
 
         timeUntilNextEnemy = Constants.firstEnemySpawnTime / Constants.timerPeriod;
+    }
+
+    public int getPoints() {
+        return playerShip.getPoints();
+    }
+
+    public int getPointsAtLevelStart() {
+        return pointsAtLevelStart;
     }
 
     public int getCurrentLevel() {
@@ -86,9 +104,8 @@ public class Game {
         return playerShip;
     }
 
-    public void keyPressed(KeyEvent e) {
-        int key = e.getKeyCode();
-
+    public void keyPressed(int key) {
+        // int key = e.getKeyCode();
         if (key == KeyEvent.VK_SPACE) {
             if (!paused) {
                 paused = true;
@@ -107,8 +124,8 @@ public class Game {
         }
     }
 
-    public void keyReleased(KeyEvent e) {
-        int key = e.getKeyCode();
+    public void keyReleased(int key) {
+        // int key = e.getKeyCode();
         if (key == KeyEvent.VK_W || key == KeyEvent.VK_A || key == KeyEvent.VK_S || key == KeyEvent.VK_D)
             playerShip.stopMoveDirection(key);
     }
@@ -138,7 +155,7 @@ public class Game {
             startingNewLevel = false;
             int minShootPeriod = Constants.minEnemyShootPeriod[currentLevel - 1];
             for (int i = 0; i < enemiesPerSpawn; i++) {
-                int health = 100;
+                int health = Constants.enemyHealth[currentLevel - 1];
                 EnemyShip enemyShip = new EnemyShip(health, minShootPeriod);
                 enemyShips.add(enemyShip);
             }
@@ -226,7 +243,7 @@ public class Game {
 
     public boolean playerWon() {
         return playerWon;
-    }
+    } 
 
     public void update() {
         moveSprites();

@@ -1,11 +1,23 @@
+import java.awt.event.*;
+import java.util.*;
+
 public class Constants {
 
 
-    /* game panel dimensions */
+    /* game panel */
     public static int PANELHEIGHT = 600;
     public static int PANELWIDTH = 600;
     public static int PANELMARGIN = 10;
     public static int HEALTHBARWIDTH = 100;
+    public static int[] controlKeys = {
+        KeyEvent.VK_W,
+        KeyEvent.VK_A,
+        KeyEvent.VK_S,
+        KeyEvent.VK_D,
+        KeyEvent.VK_SPACE,
+        KeyEvent.VK_UP,
+        KeyEvent.VK_ESCAPE
+    };
 
 
     /* images */
@@ -82,6 +94,7 @@ public class Constants {
     public static int enemySpawnPeriod = 2000;
     public static int[] minEnemyShootPeriod = {150, 125, 100, 150, 125, 100, 150, 125, 100, 150};
     public static int[] enemiesPerSpawn = {1, 1, 1, 2, 2, 2, 3, 3, 3, 4};
+    public static int[] enemyHealth = {60, 80, 100, 60, 80, 100, 60, 80, 100, 60};
     public static int shipDamageTimeout = 600;
     public static int laserDamageTimeout = 200;
     public static int spawnsPerLevel = 5;
@@ -93,5 +106,8 @@ public class Constants {
     public static int enemyDamage = 20;
     
     public static int damageEffectTime = 500;               // ~ms at 60fps
+
+
+    public static String saveGamePath = "saved-games.dat";
 
 }
