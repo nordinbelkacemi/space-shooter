@@ -1,6 +1,5 @@
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
 
 public class Window extends JFrame {
     private JPanel contentPanel;
@@ -9,8 +8,7 @@ public class Window extends JFrame {
     private GamePanel gamePanel;
     private SavedGamesPanel savedGamesPanel;
     private SaveGamePanel saveGamePanel;
-
-    // private ArrayList<Game> savedGames = SavedGamesData.loadSavedGames();
+    private LeaderBoardPanel leaderBoardPanel;
     
     public Window() {
         setTitle("SpaceShooter");
@@ -18,17 +16,19 @@ public class Window extends JFrame {
         setResizable(false);
 
         contentPanel = new JPanel();
-        initGamePanel(new Game());
         menuPanel = new MenuPanel(this);
-        cardLayout = new CardLayout();
+        gamePanel = new GamePanel(this);
         savedGamesPanel = new SavedGamesPanel(this);
         saveGamePanel = new SaveGamePanel(this);
+        leaderBoardPanel = new LeaderBoardPanel(this);
+        cardLayout = new CardLayout();
 
         contentPanel.setLayout(cardLayout);
         contentPanel.add(menuPanel, "menuPanel");
         contentPanel.add(gamePanel, "gamePanel");
         contentPanel.add(savedGamesPanel, "savedGamesPanel");
         contentPanel.add(saveGamePanel, "saveGamePanel");
+        contentPanel.add(leaderBoardPanel, "leaderBoardPanel");
 
         contentPanel.setPreferredSize(new Dimension(Constants.PANELWIDTH, Constants.PANELHEIGHT));
         add(contentPanel);
@@ -38,11 +38,8 @@ public class Window extends JFrame {
         showMenu();
     }
 
-    public void initGamePanel(Game game) {
-        gamePanel = new GamePanel(game, this);
-    }
-
-    public void showGame() {
+    public void showGame(Game game) {
+        gamePanel.loadGame(game);
         cardLayout.show(contentPanel, "gamePanel");
     }
     
@@ -55,9 +52,14 @@ public class Window extends JFrame {
         cardLayout.show(contentPanel, "savedGamesPanel");
     }
 
-    public void showSaveGameForm(GameData gameData) {
+    public void showSaveGameForm(GameData gameData, int savedGameIndex) {
+        saveGamePanel.setGameData(gameData, savedGameIndex);
         saveGamePanel.reload();
-        saveGamePanel.setGame(gameData);
         cardLayout.show(contentPanel, "saveGamePanel");
+    }
+
+    public void showLeaderBoard() {
+        leaderBoardPanel.reload();
+        cardLayout.show(contentPanel, "leaderBoardPanel");
     }
 }

@@ -1,5 +1,5 @@
-public class Main {
+public class SpaceShooter {
     public static void main(String[] args) {
-        Window w = new Window();
+        new Window();
     }
 }

@@ -1,29 +1,41 @@
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.*;
+import java.awt.*;
 
 public class MenuPanel extends JPanel {
-    private Window window;
     private JButton newGameButton;
     private JButton savedGamesButton;
     private JButton leaderBoardButton;
-    private JButton exitButton;
+    private ImageIcon backgroundImage;
 
     public MenuPanel(Window window) {
-        newGameButton = new JButton("New Game");
-        savedGamesButton = new JButton("Saved Games");
-        leaderBoardButton = new JButton("LeaderBoard");
-        exitButton = new JButton("Exit");
+        backgroundImage = new ImageIcon(getClass().getResource(Constants.menuBackground));
+        repaint();
+        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
+        add(Box.createRigidArea(new Dimension(0,175)));
+
+        newGameButton = new JButton("New Game");
+        newGameButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         add(newGameButton);
+
+        add(Box.createRigidArea(new Dimension(0,80)));
+        
+        savedGamesButton = new JButton("Saved Games");
+        savedGamesButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         add(savedGamesButton);
+
+        add(Box.createRigidArea(new Dimension(0,80)));
+        
+        leaderBoardButton = new JButton("Leaderboard");
+        leaderBoardButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         add(leaderBoardButton);
-        add(exitButton);
+        
+        
     
         newGameButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                window.initGamePanel(new Game());
-                window.showGame();
+                window.showGame(new Game());
             }
         });
 
@@ -32,5 +44,16 @@ public class MenuPanel extends JPanel {
                 window.showSavedGames();
             }
         });
+
+        leaderBoardButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                window.showLeaderBoard();
+            }
+        });
+    }
+
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        g.drawImage(backgroundImage.getImage(), 0, 0, null);
     }
 }

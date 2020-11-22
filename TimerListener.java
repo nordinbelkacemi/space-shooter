@@ -14,5 +14,6 @@ public class TimerListener implements ActionListener {
         if (!game.isOver()) {
             gamePanel.update();
         }
+        gamePanel.handleGameEnd();
     }
 }

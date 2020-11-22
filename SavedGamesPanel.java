@@ -1,38 +1,83 @@
-import java.util.ArrayList;
-import javax.swing.*;
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
 import java.awt.event.*;
-
+import javax.swing.*;
 
 public class SavedGamesPanel extends JPanel {
-    private ArrayList<GameData> savedGames;
     private Window window;
+    JPasswordField passwordField;
+    
+    private SavedGamesData data;
 
     public SavedGamesPanel(Window window) {
         this.window = window;
-        this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
+        data = new SavedGamesData();
         reload();
     }
 
     public void reload() {
-        savedGames = SavedGamesData.loadSavedGames();
-
+        data.loadSavedGames();
         removeAll();
-        JButton backButton = new JButton("Back To Menu");
-        add(backButton);
-        if (savedGames.size() == 0) {
-            JLabel label = new JLabel("No saved games yet");
-            add(label);
-        } else {
-            for (int i = 0; i < savedGames.size(); i++) {
-                GameData gameData = savedGames.get(i);
-                JLabel label = new JLabel(gameData.getName() + " - " + gameData.getScore());
-                add(label);
-            }
-        }
+        
+        this.setLayout(new BorderLayout());
+        JTable table = new JTable(data);
+        table.setFillsViewportHeight(true);
+        JScrollPane scrollpane = new JScrollPane(table);
+        add(scrollpane, BorderLayout.CENTER);
+
+        JPanel input = new JPanel(new FlowLayout());
+        JLabel passwordLabel = new JLabel("Password:");
+        passwordField = new JPasswordField(20);
+        JButton continueGameButton = new JButton("Continue Game");
+        JButton removeGameButton = new JButton("Delete");
+        input.add(passwordLabel);
+        input.add(passwordField);
+        input.add(continueGameButton);
+        input.add(removeGameButton);
+        add(input, BorderLayout.SOUTH);
+
+        JPanel top = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        JButton backButton = new JButton("Back");
+        top.add(backButton, FlowLayout.LEFT);
+        add(top, BorderLayout.NORTH);
 
         backButton.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e) {
                 window.showMenu();
+            }
+        });
+
+        continueGameButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                int index = table.getSelectedRow();
+                GameData gameData = data.getSavedGame(index);
+                String input = new String(passwordField.getPassword());
+                if (gameData.getPassword().equals(input)) {
+                    Game game = new Game(gameData, index);
+                    window.showGame(game);
+                } else {
+                    JOptionPane.showMessageDialog(window,
+                    "Password is incorrect!",
+                    "Alert",
+                    JOptionPane.PLAIN_MESSAGE);
+                }
+            }
+        });
+
+        removeGameButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                int index = table.getSelectedRow();
+                GameData gameData = data.getSavedGame(index);
+                String input = new String(passwordField.getPassword());
+                if (gameData.getPassword().equals(input)) {
+                    data.removeSavedGame(index);
+                    data.saveSavedGames();
+                } else {
+                    JOptionPane.showMessageDialog(window,
+                    "Password is incorrect!",
+                    "Alert",
+                    JOptionPane.PLAIN_MESSAGE);
+                }
             }
         });
     }

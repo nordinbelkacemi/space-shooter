@@ -1,16 +1,12 @@
 import java.io.Serializable;
 
 public class GameData implements Serializable {
-
     private String name;
     private String password;
     private int level;
     private int score;
-
-    GameData(Game game) {
-        this.level = game.getCurrentLevel();
-        this.score = game.getPointsAtLevelStart();
-    }
+    private int scoreAtLevelStart;
+    private boolean playerWon;
 
     public String getName() {
         return name;
@@ -20,12 +16,20 @@ public class GameData implements Serializable {
         this.name = name;
     }
 
-    public boolean passwordMatches(String input) {
-        return password.equals(input);
+    public String getPassword() {
+        return password;
     }
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
     }
 
     public Integer getScore() {
@@ -36,7 +40,19 @@ public class GameData implements Serializable {
         this.score = score;
     }
 
-    public int getLevel() {
-        return level;
+    public Integer getScoreAtLevelStart() {
+        return scoreAtLevelStart;
+    }
+
+    public void setScoreAtLevelStart(int score) {
+        scoreAtLevelStart = score;
+    }
+
+    public Boolean playerWon() {
+        return playerWon;
+    }
+
+    public void setPlayerWon(boolean playerWon) {
+        this.playerWon = playerWon;
     }
 }

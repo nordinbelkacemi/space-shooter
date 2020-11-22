@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-
 public abstract class Laser extends Sprite {
     protected int speed;
     protected SpaceShip spaceShip;

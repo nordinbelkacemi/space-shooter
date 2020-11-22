@@ -17,20 +17,21 @@ public class Game {
     private boolean gameOver;
     private boolean startingNewLevel;
     private boolean playerWon;
-    private int pointsAtLevelStart;
+    private boolean playerQuit;
+
+    private GameData gameData;
+    private int savedGameIndex;
 
     public Game() {
-        currentLevel = 1;
         init();
-        playerShip.setPoints(0);
+        loadGameData(new GameData(), -1);
         startLevel(1);
     }
 
-    public Game(int level, int points) {
+    public Game(GameData gameData, int savedGameIndex) {
         init();
-        currentLevel = level;
-        playerShip.setPoints(points);
-        startLevel(level);
+        loadGameData(gameData, savedGameIndex);
+        startLevel(gameData.getLevel());
     }
 
     private void init() {
@@ -41,40 +42,76 @@ public class Game {
 
         spawns = 0;
         enemiesGone = 0;
-        enemiesPerSpawn = Constants.enemiesPerSpawn[currentLevel - 1];
         gameOver = false;
     }
-
+    
+    public void loadGameData(GameData gameData, int savedGameIndex) {
+        this.gameData = gameData;
+        playerShip.setPoints(gameData.getScoreAtLevelStart());
+        this.savedGameIndex = savedGameIndex;
+    }
+    
     private void startLevel(int level) {
         startingNewLevel = true;
-        currentLevel = level;    
-        pointsAtLevelStart = playerShip.getPoints();
+        currentLevel = level;
         spawns = 0;
         enemiesGone = 0;
         enemiesPerSpawn = Constants.enemiesPerSpawn[level - 1];
         playerShip.setHealth(100);
 
+        enemiesPerSpawn = Constants.enemiesPerSpawn[currentLevel - 1];
         timeUntilNextEnemy = Constants.firstEnemySpawnTime / Constants.timerPeriod;
+        gameData.setScoreAtLevelStart(playerShip.getPoints());
+    }
+
+    public GameData getGameData() {
+        return gameData;
+    }
+
+    public int getSavedGameIndex() {
+        return savedGameIndex;
     }
 
     public int getPoints() {
         return playerShip.getPoints();
     }
-
-    public int getPointsAtLevelStart() {
-        return pointsAtLevelStart;
-    }
-
+    
     public int getCurrentLevel() {
         return currentLevel;
     }
-
+    
     public boolean isNotPaused() {
         return !paused;
     }
-
+    
     public boolean isOver() {
         return gameOver;
+    }
+
+    public void setGameOver(boolean gameOver) {
+        this.gameOver = gameOver;
+    } 
+
+    public boolean startingNewLevel() {
+        return startingNewLevel;
+    }
+
+    public boolean playerWon() {
+        return playerWon;
+    }
+
+    public void setPlayerWon(boolean playerWon) {
+        this.playerWon = playerWon;
+    }
+
+    public boolean playerQuit() {
+        return playerQuit;
+    }
+
+    public void saveGameData(boolean playerWon) {
+        gameData.setLevel(currentLevel);
+        gameData.setScore(playerShip.getPoints());
+        gameData.setPlayerWon(playerWon);
     }
 
     public ArrayList<Sprite> getAllSprites() {
@@ -105,12 +142,21 @@ public class Game {
     }
 
     public void keyPressed(int key) {
-        // int key = e.getKeyCode();
         if (key == KeyEvent.VK_SPACE) {
             if (!paused) {
                 paused = true;
             } else {
                 paused = false;
+            }
+        }
+
+        if (key == KeyEvent.VK_ESCAPE) {
+            if (paused) {
+                playerQuit = true;
+                setGameOver(true);
+                playerWon = false;
+                setPlayerWon(playerWon);
+                saveGameData(playerWon);
             }
         }
 
@@ -125,9 +171,9 @@ public class Game {
     }
 
     public void keyReleased(int key) {
-        // int key = e.getKeyCode();
-        if (key == KeyEvent.VK_W || key == KeyEvent.VK_A || key == KeyEvent.VK_S || key == KeyEvent.VK_D)
+        if (key == KeyEvent.VK_W || key == KeyEvent.VK_A || key == KeyEvent.VK_S || key == KeyEvent.VK_D) {
             playerShip.stopMoveDirection(key);
+        }
     }
 
     private void moveSprites() {
@@ -237,13 +283,6 @@ public class Game {
         }
     }
 
-    public boolean startingNewLevel() {
-        return startingNewLevel;
-    }
-
-    public boolean playerWon() {
-        return playerWon;
-    } 
 
     public void update() {
         moveSprites();
@@ -261,12 +300,14 @@ public class Game {
             } else {
                 gameOver = true;
                 playerWon = true;
+                saveGameData(playerWon);
             }
         }
 
         if (playerShip.hasExploded()) {
             gameOver = true;
             playerWon = false;
+            saveGameData(playerWon);
         }
     }
 }

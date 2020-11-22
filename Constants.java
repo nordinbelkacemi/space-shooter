@@ -10,13 +10,13 @@ public class Constants {
     public static int PANELMARGIN = 10;
     public static int HEALTHBARWIDTH = 100;
     public static int[] controlKeys = {
-        KeyEvent.VK_W,
-        KeyEvent.VK_A,
-        KeyEvent.VK_S,
-        KeyEvent.VK_D,
-        KeyEvent.VK_SPACE,
-        KeyEvent.VK_UP,
-        KeyEvent.VK_ESCAPE
+        KeyEvent.VK_W,                      // UP
+        KeyEvent.VK_A,                      // LEFT
+        KeyEvent.VK_S,                      // DOWN    
+        KeyEvent.VK_D,                      // RIGHT
+        KeyEvent.VK_SPACE,                  // PAUSE
+        KeyEvent.VK_UP,                     // SHOOT
+        KeyEvent.VK_ESCAPE                  // QUIT
     };
 
 
@@ -67,6 +67,7 @@ public class Constants {
 
     public static String pauseScreen = "images/pause-screen.png";
     public static String gameOverScreen = "images/game-over-screen.png";
+    public static String menuBackground = "images/menu-background.png";
     public static String[] levels = {
         "images/level-1.png",
         "images/level-2.png",
