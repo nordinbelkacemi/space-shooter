@@ -1,3 +1,6 @@
+package models;
+
+import game.Constants;
 import java.awt.event.*;
 import java.util.ArrayList;
 

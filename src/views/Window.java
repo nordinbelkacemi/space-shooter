@@ -1,7 +1,13 @@
+package views;
+
+import game.*;
 import javax.swing.*;
 import java.awt.*;
 
 public class Window extends JFrame {
+
+    private static final long serialVersionUID = 5165378072367073281L;
+
     private JPanel contentPanel;
     private CardLayout cardLayout;
     private MenuPanel menuPanel;

@@ -1,3 +1,7 @@
+package models;
+
+import game.Constants;
+
 public abstract class Laser extends Sprite {
     protected int speed;
     protected SpaceShip spaceShip;

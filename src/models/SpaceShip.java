@@ -1,3 +1,7 @@
+package models;
+
+import game.Constants;
+
 public abstract class SpaceShip extends Sprite {
     protected int health;
     protected int xSpeed, ySpeed;

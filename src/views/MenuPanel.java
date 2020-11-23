@@ -1,8 +1,14 @@
+package views;
+
+import game.*;
 import javax.swing.*;
 import java.awt.event.*;
 import java.awt.*;
 
 public class MenuPanel extends JPanel {
+
+    private static final long serialVersionUID = -859601827275645340L;
+
     private JButton newGameButton;
     private JButton savedGamesButton;
     private JButton leaderBoardButton;

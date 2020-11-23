@@ -1,9 +1,15 @@
+package views;
+
+import game.*;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.event.*;
 import javax.swing.*;
 
 public class SavedGamesPanel extends JPanel {
+
+    private static final long serialVersionUID = -3973637354719708512L;
+
     private Window window;
     JPasswordField passwordField;
     

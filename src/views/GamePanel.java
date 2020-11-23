@@ -1,3 +1,7 @@
+package views;
+
+import game.*;
+import models.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -5,6 +9,9 @@ import java.util.ArrayList;
 import java.io.InputStream;
 
 public class GamePanel extends JPanel {
+
+    private static final long serialVersionUID = -5605519769265821789L;
+
     private Window window;
     private int WIDTH = Constants.PANELWIDTH;
     private int HEIGHT = Constants.PANELHEIGHT;
@@ -66,6 +73,9 @@ public class GamePanel extends JPanel {
 
         getInputMap(WHEN_IN_FOCUSED_WINDOW).put(keyStroke, name);
         getActionMap().put(name, new AbstractAction() {
+
+            private static final long serialVersionUID = 5996049119178103641L;
+
             public void actionPerformed(ActionEvent a) {
                 if (onKeyRelease) {
                     game.keyReleased(key);

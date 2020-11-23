@@ -1,3 +1,5 @@
+package game;
+
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
@@ -8,6 +10,9 @@ import javax.swing.table.*;
 import java.util.*;
 
 public class SavedGamesData extends AbstractTableModel {
+
+    private static final long serialVersionUID = -1027040641549483407L;
+
     private ArrayList<GameData> savedGames;
     
     public SavedGamesData() {

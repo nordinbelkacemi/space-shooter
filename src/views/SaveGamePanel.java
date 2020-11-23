@@ -1,8 +1,14 @@
+package views;
+
+import game.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
 public class SaveGamePanel extends JPanel {
+
+    private static final long serialVersionUID = -9061411989723017258L;
+
     private GameData gameData;
     private Window window;
     private JTextField nameField;

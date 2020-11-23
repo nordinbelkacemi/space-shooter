@@ -1,3 +1,6 @@
+package models;
+import game.Constants;
+
 import java.util.Random;
 import java.lang.Math;
 
@@ -15,11 +18,11 @@ public class EnemyShip extends SpaceShip {
         setPos(random.nextInt(Constants.PANELWIDTH - spriteWidth), 0 - spriteHeight);
         ySpeed = Constants.enemySpeed;
         xSpeed = 0;
-        inactive = false;
-        this.health = health;
-        waiting = true;
-        this.minShootPeriod = minShootPeriod;
         waitTime = Math.abs(random.nextInt() % minShootPeriod);
+        this.health = health;
+        this.minShootPeriod = minShootPeriod;
+        inactive = false;
+        waiting = true;
         timeUntilNextDamage = 0;
         damage = Constants.enemyDamage;
     }

@@ -1,3 +1,6 @@
+package models;
+
+import game.Constants;
 import java.util.ArrayList;
 
 public class PlayerLaser extends Laser {

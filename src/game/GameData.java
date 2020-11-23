@@ -1,6 +1,11 @@
+package game;
+
 import java.io.Serializable;
 
 public class GameData implements Serializable {
+
+    private static final long serialVersionUID = 6873345096784176083L;
+
     private String name;
     private String password;
     private int level;

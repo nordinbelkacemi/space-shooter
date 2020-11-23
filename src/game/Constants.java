@@ -1,5 +1,6 @@
+package game;
+
 import java.awt.event.*;
-import java.util.*;
 
 public class Constants {
 
@@ -22,67 +23,58 @@ public class Constants {
 
     /* images */
     public static String[] explosionIcons = {
-        "images/explosion-1.png",
-        "images/explosion-2.png",
-        "images/explosion-3.png",
-        "images/explosion-4.png",
-        "images/explosion-5.png",
-        "images/explosion-6.png",
-        "images/explosion-7.png",
-        "images/explosion-8.png",
-        "images/explosion-9.png",
-        "images/explosion-10.png",
+        "/images/explosion-1.png",
+        "/images/explosion-2.png",
+        "/images/explosion-3.png",
+        "/images/explosion-4.png",
+        "/images/explosion-5.png",
+        "/images/explosion-6.png",
+        "/images/explosion-7.png",
+        "/images/explosion-8.png",
+        "/images/explosion-9.png",
+        "/images/explosion-10.png",
     };
     public static int explosionIconWidth = 40;
     public static int explosionIconHeight = 40;
 
-    public static String spaceShipIcon = "images/player-ship.png";
-    public static String redSpaceShipIcon = "images/player-ship-red.png";
+    public static String spaceShipIcon = "/images/player-ship.png";
+    public static String redSpaceShipIcon = "/images/player-ship-red.png";
     public static int spaceShipIconWidth = 37;
     public static int spaceShipIconHeight = 35;
 
-    public static String enemyShipIcon = "images/enemy-ship.png";
+    public static String enemyShipIcon = "/images/enemy-ship.png";
     public static String[] redEnemyShipIcons = {
-        "images/enemy-ship-80hp.png",
-        "images/enemy-ship-60hp.png",
-        "images/enemy-ship-40hp.png",
-        "images/enemy-ship-20hp.png",
+        "/images/enemy-ship-80hp.png",
+        "/images/enemy-ship-60hp.png",
+        "/images/enemy-ship-40hp.png",
+        "/images/enemy-ship-20hp.png",
     };
     public static int enemyShipIconWidth = 35;
     public static int enemyShipIconHeight = 38;
-    // public static String enemyShipIcon = "images/gajdos.jpeg";
-    // public static String[] redEnemyShipIcons = {
-    //     "images/gajdos.jpeg",
-    //     "images/gajdos.jpeg",
-    //     "images/gajdos.jpeg",
-    //     "images/gajdos.jpeg",
-    // };
-    // public static int enemyShipIconWidth = 35;
-    // public static int enemyShipIconHeight = 35;
 
-    public static String playerLaserIcon = "images/blue-laser.png";
-    public static String enemyLaserIcon = "images/orange-laser.png";
+    public static String playerLaserIcon = "/images/blue-laser.png";
+    public static String enemyLaserIcon = "/images/orange-laser.png";
     public static int laserIconWidth = 5;
     public static int laserIconHeight = 15;
 
-    public static String pauseScreen = "images/pause-screen.png";
-    public static String gameOverScreen = "images/game-over-screen.png";
-    public static String menuBackground = "images/menu-background.png";
+    public static String pauseScreen = "/images/pause-screen.png";
+    public static String gameOverScreen = "/images/game-over-screen.png";
+    public static String menuBackground = "/images/menu-background.png";
     public static String[] levels = {
-        "images/level-1.png",
-        "images/level-2.png",
-        "images/level-3.png",
-        "images/level-4.png",
-        "images/level-5.png",
-        "images/level-6.png",
-        "images/level-7.png",
-        "images/level-8.png",
-        "images/level-9.png",
-        "images/level-10.png"
+        "/images/level-1.png",
+        "/images/level-2.png",
+        "/images/level-3.png",
+        "/images/level-4.png",
+        "/images/level-5.png",
+        "/images/level-6.png",
+        "/images/level-7.png",
+        "/images/level-8.png",
+        "/images/level-9.png",
+        "/images/level-10.png"
     };
     public static int levelLabelWidth = 225;
     public static int levelLabelHeight = 50;
-    public static String pointsFont = "fonts/00TT.TTF";
+    public static String pointsFont = "/fonts/00TT.TTF";
 
 
     /* game constants */
@@ -112,3 +104,4 @@ public class Constants {
     public static String saveGamePath = "saved-games.dat";
 
 }
+

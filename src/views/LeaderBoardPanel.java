@@ -1,11 +1,15 @@
+package views;
+
+import game.*;
 import javax.swing.*;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
-import javax.swing.table.*;
 import java.awt.event.*;
-import java.util.Collections;
 
 public class LeaderBoardPanel extends JPanel {
+
+    private static final long serialVersionUID = 3359344461279206275L;
+
     private Window window;
     private SavedGamesData data;
 
