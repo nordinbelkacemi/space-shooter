@@ -49,34 +49,48 @@ public class SavedGamesPanel extends JPanel {
 
         continueGameButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                int index = table.getSelectedRow();
-                GameData gameData = data.getSavedGame(index);
-                String input = new String(passwordField.getPassword());
-                if (gameData.getPassword().equals(input)) {
-                    Game game = new Game(gameData, index);
-                    window.showGame(game);
+                if (!table.getSelectionModel().isSelectionEmpty()) {
+                    int index = table.getSelectedRow();
+                    GameData gameData = data.getSavedGame(index);
+                    String input = new String(passwordField.getPassword());
+                    if (gameData.getPassword().equals(input)) {
+                        Game game = new Game(gameData, index);
+                        window.showGame(game);
+                    } else {
+                        JOptionPane.showMessageDialog(window,
+                        "Password is incorrect!",
+                        "Alert",
+                        JOptionPane.PLAIN_MESSAGE);
+                    }
                 } else {
                     JOptionPane.showMessageDialog(window,
-                    "Password is incorrect!",
-                    "Alert",
-                    JOptionPane.PLAIN_MESSAGE);
+                        "Select a row first!",
+                        "Alert",
+                        JOptionPane.PLAIN_MESSAGE);
                 }
             }
         });
 
         removeGameButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                int index = table.getSelectedRow();
-                GameData gameData = data.getSavedGame(index);
-                String input = new String(passwordField.getPassword());
-                if (gameData.getPassword().equals(input)) {
-                    data.removeSavedGame(index);
-                    data.saveSavedGames();
+                if (!table.getSelectionModel().isSelectionEmpty()) {
+                    int index = table.getSelectedRow();
+                    GameData gameData = data.getSavedGame(index);
+                    String input = new String(passwordField.getPassword());
+                    if (gameData.getPassword().equals(input)) {
+                        data.removeSavedGame(index);
+                        data.saveSavedGames();
+                    } else {
+                        JOptionPane.showMessageDialog(window,
+                        "Password is incorrect!",
+                        "Alert",
+                        JOptionPane.PLAIN_MESSAGE);
+                    }
                 } else {
                     JOptionPane.showMessageDialog(window,
-                    "Password is incorrect!",
-                    "Alert",
-                    JOptionPane.PLAIN_MESSAGE);
+                        "Select a row first!",
+                        "Alert",
+                        JOptionPane.PLAIN_MESSAGE);
                 }
             }
         });
