@@ -37,10 +37,10 @@ public class Constants {
     public static int explosionIconWidth = 40;
     public static int explosionIconHeight = 40;
 
-    public static String spaceShipIcon = "/images/player-ship.png";
+    public static String playerShipIcon = "/images/player-ship.png";
     public static String redSpaceShipIcon = "/images/player-ship-red.png";
-    public static int spaceShipIconWidth = 37;
-    public static int spaceShipIconHeight = 35;
+    public static int playerShipIconWidth = 37;
+    public static int playerShipIconHeight = 35;
 
     public static String enemyShipIcon = "/images/enemy-ship.png";
     public static String[] redEnemyShipIcons = {
@@ -80,7 +80,7 @@ public class Constants {
     /* game constants */
     public static int timerPeriod = 17;                     // ~60fps
     public static int enemySpeed = 1;
-    public static int playerSpeed = 2;
+    public static int playerSpeed = 5;
     public static int playerLaserSpeed = -20;
     public static int enemyLaserSpeed = 10;
     public static int firstEnemySpawnTime = 5000;
@@ -100,8 +100,6 @@ public class Constants {
     
     public static int damageEffectTime = 500;               // ~ms at 60fps
 
-
     public static String saveGamePath = "saved-games.dat";
 
 }
-

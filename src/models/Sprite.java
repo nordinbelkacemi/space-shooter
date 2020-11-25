@@ -25,7 +25,7 @@ public abstract class Sprite {
         return img.getImage();
     }
     
-    public void setPos(int px, int py) {
+    protected void setPos(int px, int py) {
         x = px;
         y = py;
     }
@@ -71,5 +71,5 @@ public abstract class Sprite {
         return inactive;
     }
 
-    public abstract void move();
+    protected abstract void move();
 }

@@ -18,7 +18,7 @@ public class EnemyShip extends SpaceShip {
         setPos(random.nextInt(Constants.PANELWIDTH - spriteWidth), 0 - spriteHeight);
         ySpeed = Constants.enemySpeed;
         xSpeed = 0;
-        waitTime = Math.abs(random.nextInt() % minShootPeriod);
+        waitTime = Math.abs(random.nextInt(minShootPeriod));
         this.health = health;
         this.minShootPeriod = minShootPeriod;
         inactive = false;
@@ -35,7 +35,7 @@ public class EnemyShip extends SpaceShip {
     
     private void setRandomWaitTime() {
         waitTime = minShootPeriod;
-        waitTime += Math.abs(random.nextInt() % (minShootPeriod / 5));
+        waitTime += Math.abs(random.nextInt(minShootPeriod / 5));
     }
 
     public void stepWaitTime() {

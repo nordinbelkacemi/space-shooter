@@ -77,6 +77,8 @@ nb-configuration.xml
 ##############################
 .vscode/
 .code-workspace
+lib
+test
 
 ##############################
 ## OS X
@@ -91,3 +93,6 @@ Makefile
 
 # MANIFEST
 *.mf
+
+# shell script
+*.sh

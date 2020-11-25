@@ -8,8 +8,8 @@ public class PlayerShip extends SpaceShip{
     private String redImagePath;
 
     public PlayerShip() {
-        setImage(Constants.spaceShipIcon, Constants.spaceShipIconWidth, Constants.spaceShipIconHeight);
-        imagePath = Constants.spaceShipIcon;
+        setImage(Constants.playerShipIcon, Constants.playerShipIconWidth, Constants.playerShipIconHeight);
+        imagePath = Constants.playerShipIcon;
         redImagePath = Constants.redSpaceShipIcon;
 
         health = 100;
@@ -52,26 +52,54 @@ public class PlayerShip extends SpaceShip{
         int h = Constants.PANELHEIGHT;
         int w = Constants.PANELWIDTH;
         int margin = Constants.PANELMARGIN;
+        int xMin = margin;
+        int xMax = w - spriteWidth - margin;
+        int yMin = margin;
+        int yMax = h - spriteHeight - margin;
 
-        if (x - margin > 0)
-            x += xSpeed;
-        else
-            x = margin + 1;
+        /* left boundary, moving left */
+        if (xSpeed < 0) {
+            if (x > xMin) {
+                if (xSpeed < xMin - x) {
+                    x -= x - xMin;
+                } else {
+                    x += xSpeed;
+                }
+            }
+        }
 
-        if (x + spriteWidth + margin < w)
-            x += xSpeed;
-        else
-            x = w - (spriteWidth + margin);
+        /* right boundary, moving right */
+        if (xSpeed > 0) {
+            if (x < xMax) {
+                if (xMax - x < xSpeed) {
+                    x += xMax - x;
+                } else {
+                    x += xSpeed;
+                }
+            }
+        }
 
-        if (y - margin > 0)
-            y += ySpeed;
-        else
-            y = margin + 1;
+        /* top boundary, moving up */
+        if (ySpeed < 0) {
+            if (y > yMin) {
+                if (ySpeed < yMin - y) {
+                    y -= y - yMin;
+                } else {
+                    y += ySpeed;
+                }
+            }
+        }
 
-        if (y + spriteHeight + margin < h)
-            y += ySpeed;
-        else
-            y = h - (spriteWidth + margin);
+        /* bottom boundary, moving down */
+        if (ySpeed > 0) {
+            if (y < yMax) {
+                if (yMax - y < ySpeed) {
+                    y += yMax - y;
+                } else {
+                    y += ySpeed;
+                }
+            }
+        }
     }
 
     public PlayerLaser shootLaser() {
