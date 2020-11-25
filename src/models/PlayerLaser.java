@@ -4,8 +4,8 @@ import game.Constants;
 import java.util.ArrayList;
 
 public class PlayerLaser extends Laser {
-    public PlayerLaser(int x, int y, SpaceShip spaceShip) {
-        super(x, y, spaceShip);
+    public PlayerLaser(SpaceShip spaceShip) {
+        super(spaceShip);
         setImage(Constants.playerLaserIcon, Constants.laserIconWidth, Constants.laserIconHeight);
         this.speed = Constants.playerLaserSpeed;
     }

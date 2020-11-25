@@ -103,7 +103,7 @@ public class PlayerShip extends SpaceShip{
     }
 
     public PlayerLaser shootLaser() {
-        PlayerLaser laser = new PlayerLaser(x, y, this);
+        PlayerLaser laser = new PlayerLaser(this);
         return laser;
     }
 

@@ -2,6 +2,7 @@ package models;
 
 import javax.swing.*;
 import java.awt.Image;
+import game.Constants;
 
 public abstract class Sprite {
     protected ImageIcon img;
@@ -12,7 +13,6 @@ public abstract class Sprite {
     protected int x;
     protected int y;
 
-    protected boolean outOfRange = false;
     protected boolean inactive = false;
 
     public void setImage(String imagePath, int width, int height) {
@@ -25,7 +25,7 @@ public abstract class Sprite {
         return img.getImage();
     }
     
-    protected void setPos(int px, int py) {
+    public void setPos(int px, int py) {
         x = px;
         y = py;
     }
@@ -64,7 +64,7 @@ public abstract class Sprite {
     }
 
     public boolean isOutOfRange() {
-        return outOfRange;
+        return y < 0 - spriteHeight || y > Constants.PANELHEIGHT;
     }
 
     public boolean isInactive() {

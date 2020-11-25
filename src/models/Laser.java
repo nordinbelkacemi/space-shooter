@@ -6,8 +6,8 @@ public abstract class Laser extends Sprite {
     protected int speed;
     protected SpaceShip spaceShip;
 
-    public Laser(int x, int y, SpaceShip spaceShip) {
-        setPos(x + Constants.playerShipIconWidth / 2, y - spriteHeight);
+    public Laser(SpaceShip spaceShip) {
+        setPos(spaceShip.getX() + Constants.playerShipIconWidth / 2, spaceShip.getY());
         this.spaceShip = spaceShip;
     }
 
@@ -20,9 +20,6 @@ public abstract class Laser extends Sprite {
 
     public void move() {
         y += speed;
-        if (y < 0 - spriteHeight || y > Constants.PANELHEIGHT) {
-            outOfRange = true;
-        }
     }
 
     protected abstract void giveDamage(SpaceShip spaceShip);

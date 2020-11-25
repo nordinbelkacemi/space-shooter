@@ -29,8 +29,6 @@ public class EnemyShip extends SpaceShip {
     
     public void move() {
         y += ySpeed;
-        if (y > Constants.PANELHEIGHT)
-            outOfRange = true;
     }
     
     private void setRandomWaitTime() {
@@ -51,7 +49,7 @@ public class EnemyShip extends SpaceShip {
     }
 
     public EnemyLaser shootLaser() {
-        EnemyLaser laser = new EnemyLaser(x, y, this);
+        EnemyLaser laser = new EnemyLaser(this);
         waiting = true;
         return laser;
     }

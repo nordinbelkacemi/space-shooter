@@ -144,6 +144,18 @@ public class Game {
         return playerShip;
     }
 
+    public ArrayList<EnemyShip> getEnemyShips() {
+        return enemyShips;
+    }
+
+    public ArrayList<PlayerLaser> getPlayerLasers() {
+        return playerLasers;
+    }
+
+    public ArrayList<EnemyLaser> getEnemyLasers() {
+        return enemyLasers;
+    }
+
     public void keyPressed(int key) {
         if (key == KeyEvent.VK_SPACE) {
             if (!paused) {
@@ -179,7 +191,7 @@ public class Game {
         }
     }
 
-    private void moveSprites() {
+    public void moveSprites() {
         playerShip.move();
         
         for (int i = 0; i < enemyShips.size(); i++) {
@@ -198,7 +210,7 @@ public class Game {
         }
     }
 
-    private void spawnEnemyShips() {
+    public void spawnEnemyShips() {
         timeUntilNextEnemy -= 1;
         if (timeUntilNextEnemy == 0 && spawns < Constants.spawnsPerLevel) {
             startingNewLevel = false;
@@ -213,7 +225,7 @@ public class Game {
         }
     }
 
-    private void removeOutOfRangeSprites() {
+    public void removeOutOfRangeSprites() {
         playerLasers.removeIf(laser -> laser.isOutOfRange());
         enemyLasers.removeIf(laser -> laser.isOutOfRange());
 
@@ -224,7 +236,7 @@ public class Game {
         playerShip.setPoints(points - Constants.enemyPassPenalty * enemiesOutOfRange);
     }
 
-    private void removeInactiveSprites() {
+    public void removeInactiveSprites() {
         playerLasers.removeIf(laser -> laser.isInactive());
         enemyLasers.removeIf(laser -> laser.isInactive());
 
@@ -236,31 +248,32 @@ public class Game {
         playerShip.setPoints(points + Constants.pointsPerKill * explodedEnemies);
     }
 
-    private void handlePlayerLaserCollisions() {
+
+    public void handlePlayerLaserCollisions() {
         for (int i = 0; i < playerLasers.size(); i++) {
             PlayerLaser laser = playerLasers.get(i);
             laser.handleCollisionWith(enemyShips);
         }
     }
 
-    private void handleEnemyLaserCollisions() {
+    public void handleEnemyLaserCollisions() {
         for (int i = 0; i < enemyLasers.size(); i++) {
             EnemyLaser laser = enemyLasers.get(i);
             laser.handleCollisionWith(playerShip);
         }
     }
 
-    private void handleSpaceShipCollisions() {
+    public void handleSpaceShipCollisions() {
         playerShip.handleCollisionWith(enemyShips);
     }
 
-    private void handleCollisions() {
+    public void handleCollisions() {
         handlePlayerLaserCollisions();
         handleEnemyLaserCollisions();
         handleSpaceShipCollisions();
     }
 
-    private void handleExplosions() {
+    public void handleExplosions() {
         for (int i = 0; i < enemyShips.size(); i++) {
             EnemyShip enemyShip = enemyShips.get(i);
             if (enemyShip.isExploding())
@@ -271,11 +284,11 @@ public class Game {
             playerShip.stepExplosionState();
     }
 
-    private void handleDamageTimeout() {
+    public void handleDamageTimeout() {
         playerShip.stepDamageTimeout();
     }
 
-    private void makeEnemyShipsShoot() {
+    public void makeEnemyShipsShoot() {
         for (int i = 0; i < enemyShips.size(); i++) {
             EnemyShip enemyShip = enemyShips.get(i);
             enemyShip.stepWaitTime();
@@ -285,7 +298,6 @@ public class Game {
             }
         }
     }
-
 
     public void update() {
         moveSprites();

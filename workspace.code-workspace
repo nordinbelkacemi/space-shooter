@@ -1,0 +1,16 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "src"
+		},
+		{
+			"path": "lib"
+		}
+	],
+	"settings": {
+		"java.dependency.syncWithFolderExplorer": true
+	}
+}
