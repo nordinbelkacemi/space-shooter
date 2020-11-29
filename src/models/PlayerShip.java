@@ -5,8 +5,18 @@ import java.awt.event.*;
 import java.util.ArrayList;
 
 public class PlayerShip extends SpaceShip{
+    /**
+     * A játékos űrhajó ikonjának a piros változatának képfájljának az elérési útja.
+     * 
+     */
     private String redImagePath;
 
+    /**
+     * Játékos űrhajó konstruktor
+     * 
+     * Beállítja a kezdeti életpontokat, pozíciót, sebességet és egyéb alapadatokat.
+     * 
+     */
     public PlayerShip() {
         setImage(Constants.playerShipIcon, Constants.playerShipIconWidth, Constants.playerShipIconHeight);
         imagePath = Constants.playerShipIcon;
@@ -20,6 +30,12 @@ public class PlayerShip extends SpaceShip{
         damage = Constants.playerDamage;
     }
 
+    /**
+     * A mozgási irányt beállító függvény.
+     * 
+     * Beállítja a mozgási irányt
+     * @param key
+     */
     public void setMoveDirection(int key) {
         if (key == KeyEvent.VK_W)
             ySpeed = -Constants.playerSpeed;
@@ -34,6 +50,12 @@ public class PlayerShip extends SpaceShip{
             xSpeed = Constants.playerSpeed;
     }
 
+    /**
+     * Mozgást leállító függvény
+     * 
+     * Lenullázza a sebességet egy adott irányban.
+     * @param key
+     */
     public void stopMoveDirection(int key) {
         if (key == KeyEvent.VK_W && ySpeed < 0)
             ySpeed = 0;
@@ -48,6 +70,12 @@ public class PlayerShip extends SpaceShip{
             xSpeed = 0;
     }
 
+    /**
+     * Mozgás függvény
+     * 
+     * Hozzáadja az x koordinátához az x sebességet, illetve az y koordinátához az y sebességet úgy, hogy
+     * a játékpanelen belül marad az űrhajó.
+     */
     public void move() {
         int h = Constants.PANELHEIGHT;
         int w = Constants.PANELWIDTH;
@@ -102,11 +130,23 @@ public class PlayerShip extends SpaceShip{
         }
     }
 
+    /**
+     * Lézert lövő függvény
+     * 
+     * @return A kilőtt lézer
+     */
     public PlayerLaser shootLaser() {
         PlayerLaser laser = new PlayerLaser(this);
         return laser;
     }
 
+    /**
+     * Az sebzésre reagáló függvény
+     * 
+     * Megváltoztatja az űrhajó ikonját, ha sebződik: Addig piros, amíg nem sebzödhet: pl. ha
+     * lézerrel eltalálják, akkor a Constants osztályban szereplő laserDamageTimeout által megadott
+     * ideig lesz piros (közben nem kaphat újabb sebzést).
+     */
     protected void reactToDamage() {
         if (health != 0) {
             if (timeUntilNextDamage == 0) {
@@ -117,6 +157,13 @@ public class PlayerShip extends SpaceShip{
         }
     }
 
+    /**
+     * Ellenség űrhajókkal való ütközéseket kezelő függvény
+     * 
+     * Ha ütközik egy ellenséggel a játékos, akkor az utóbbi sebzést kap.
+     * @param enemyShips Az ellenség űrhajók amelyekkel vizsgálja az ütközés feltételét.
+     * 
+     */
     public void handleCollisionWith(ArrayList<EnemyShip> enemyShips) {
         for (int i = 0; i < enemyShips.size(); i++) {
             EnemyShip enemyShip = enemyShips.get(i);

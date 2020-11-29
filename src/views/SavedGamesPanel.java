@@ -10,21 +10,43 @@ public class SavedGamesPanel extends JPanel {
 
     private static final long serialVersionUID = -3973637354719708512L;
 
+    /**
+     * A mentett játékok panel-t tartalmazó ablak
+     * 
+     */
     private Window window;
+
+    /**
+     * A jelszó mezö
+     * 
+     */
     JPasswordField passwordField;
     
+    /**
+     * Mentett játékok adatait tároló objektum
+     * 
+     */
     private SavedGamesData data;
 
+    /**
+     * Mentett játékok panel konstruktora
+     * @param window A mentett játékok panel-t tartalmazó ablak
+     */
     public SavedGamesPanel(Window window) {
         this.window = window;
         data = new SavedGamesData();
         reload();
     }
 
+    /**
+     * A mentett játékok panel-t frissítö függvény
+     * 
+     * Ujratölti az adatokat és a grafikus komponenseket.
+     * 
+     */
     public void reload() {
         data.loadSavedGames();
         removeAll();
-        
         this.setLayout(new BorderLayout());
         JTable table = new JTable(data);
         table.setFillsViewportHeight(true);

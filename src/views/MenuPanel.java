@@ -9,11 +9,35 @@ public class MenuPanel extends JPanel {
 
     private static final long serialVersionUID = -859601827275645340L;
 
+    /**
+     * Uj játék gomb
+     * 
+     */
     private JButton newGameButton;
+
+    /**
+     * Mentett játékok gomb
+     * 
+     */
     private JButton savedGamesButton;
+
+    /**
+     * Dicsöséglista gomb
+     * 
+     */
     private JButton leaderBoardButton;
+
+    /**
+     * Háttérkép
+     * 
+     */
     private ImageIcon backgroundImage;
 
+    /**
+     * Menü panel konstruktora
+     * 
+     * @param window
+     */
     public MenuPanel(Window window) {
         backgroundImage = new ImageIcon(getClass().getResource(Constants.menuBackground));
         repaint();
@@ -36,8 +60,6 @@ public class MenuPanel extends JPanel {
         leaderBoardButton = new JButton("Leaderboard");
         leaderBoardButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         add(leaderBoardButton);
-        
-        
     
         newGameButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -58,6 +80,10 @@ public class MenuPanel extends JPanel {
         });
     }
 
+    /**
+     * Megjeleníti a háttérképet a menü panelen
+     * 
+     */
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         g.drawImage(backgroundImage.getImage(), 0, 0, null);

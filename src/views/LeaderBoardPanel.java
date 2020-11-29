@@ -10,15 +10,33 @@ public class LeaderBoardPanel extends JPanel {
 
     private static final long serialVersionUID = 3359344461279206275L;
 
+    /**
+     * A dicsöséglista panelt tartalmazó ablak.
+     * 
+     */
     private Window window;
+
+    /**
+     * A mentett játékokat tároló objektum
+     * 
+     */
     private SavedGamesData data;
 
+    /**
+     * A dicsöséglista panel konstruktora. Inicializálja a mentett játékokat tároló objektumot és
+     * egy frissítéssel betölti az adatokat, illetve a panel komponenseit.
+     * 
+     */
     public LeaderBoardPanel(Window window) {
         this.window = window;
         data = new SavedGamesData();
         reload();
     }
 
+    /**
+     * Adatok betöltésére, illetve a panel komponenseinek betöltésére szolgáló függvény
+     * 
+     */
     public void reload() {
         data.loadSavedGames();
         data.sortAndReduce(10);

@@ -94,5 +94,5 @@ Makefile
 # MANIFEST
 *.mf
 
-# shell script
-*.sh
+# docs
+docs/

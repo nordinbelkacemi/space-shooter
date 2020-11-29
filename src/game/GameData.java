@@ -6,13 +6,38 @@ public class GameData implements Serializable {
 
     private static final long serialVersionUID = 6873345096784176083L;
 
+    /**
+     * A játékmenet neve.
+     *  
+     */
     private String name;
+
+    /**
+     * A játékmenet jelszava.
+     *  
+     */
     private String password;
+
+    /**
+     * A játékmenet utolsó elért szintje.
+     *  
+     */
     private int level;
+
+    /**
+     * A játékos pontszáma meghaláskor.
+     *  
+     */
     private int score;
+
+    /**
+     * A játékos pontszáma az utolsó elért szint elején.
+     *  
+     */
     private int scoreAtLevelStart;
     private boolean playerWon;
 
+    
     public String getName() {
         return name;
     }
