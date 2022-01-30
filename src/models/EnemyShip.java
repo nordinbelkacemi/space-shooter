@@ -23,7 +23,11 @@ public class EnemyShip extends SpaceShip {
      */
     private int minShootPeriod;
 
-    Random random;
+    /**
+     * Véletlen számgenerátor objektum. Ez a lövési periódusának beállítását szolgálja.
+     * 
+     */
+    private Random random;
 
     /**
      * Egy ellenség űrhajót inicializáló konstruktor. Egy véletlenszerű x koordinátát kap.

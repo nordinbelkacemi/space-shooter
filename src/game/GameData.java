@@ -35,6 +35,11 @@ public class GameData implements Serializable {
      *  
      */
     private int scoreAtLevelStart;
+
+    /** 
+     * Tárolja, hogy a játékos nyert-e
+     * 
+     */
     private boolean playerWon;
 
     

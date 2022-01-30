@@ -20,7 +20,7 @@ public class SavedGamesPanel extends JPanel {
      * A jelszó mezö
      * 
      */
-    JPasswordField passwordField;
+    private JPasswordField passwordField;
     
     /**
      * Mentett játékok adatait tároló objektum

@@ -73,12 +73,12 @@ public abstract class Sprite {
     
     /**
      * A sprite pozízióját/koordinátáit beállító függvény
-     * @param px A sprite x koordinátája
-     * @param py A sprite y koordinátája
+     * @param x A sprite x koordinátája
+     * @param y A sprite y koordinátája
      */
-    public void setPos(int px, int py) {
-        x = px;
-        y = py;
+    public void setPos(int x, int y) {
+        this.x = x;
+        this.y = y;
     }
     
     public int getX() {
